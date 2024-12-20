@@ -18,20 +18,27 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link as RouterLink } from 'react-router-dom';
 
-const SignInPage = () => {
+const SignUpPage = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignIn = (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
     setIsLoading(true);
 
-    // Simulate a sign-in process
+    // Simulate a sign-up process
     setTimeout(() => {
       setIsLoading(false);
-      alert(`Welcome back, ${email}!`);
+      alert(`Account created for ${username}!`);
     }, 1500);
   };
 
@@ -54,9 +61,21 @@ const SignInPage = () => {
           }}
         >
           <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
-            Sign In
+            Sign Up
           </Typography>
-          <Box component="form" onSubmit={handleSignIn} noValidate sx={{ width: '100%', mt: 1 }}>
+          <Box component="form" onSubmit={handleSignUp} noValidate sx={{ width: '100%', mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
             <TextField
               margin="normal"
               required
@@ -65,7 +84,6 @@ const SignInPage = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -84,6 +102,21 @@ const SignInPage = () => {
                 }
               />
             </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel>Confirm Password</InputLabel>
+              <OutlinedInput
+                type={showPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
             <Button
               type="submit"
               fullWidth
@@ -91,12 +124,12 @@ const SignInPage = () => {
               sx={{ mt: 3, mb: 2 }}
               disabled={isLoading}
             >
-              {isLoading ? <CircularProgress size={24} /> : 'Sign In'}
+              {isLoading ? <CircularProgress size={24} /> : 'Sign Up'}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link component={RouterLink} to="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link component={RouterLink} to="/login" variant="body2">
+                  {"Already have an account? Sign In"}
                 </Link>
               </Grid>
             </Grid>
@@ -121,4 +154,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
