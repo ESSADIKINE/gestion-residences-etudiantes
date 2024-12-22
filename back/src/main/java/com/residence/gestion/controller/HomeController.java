@@ -10,9 +10,4 @@ public class HomeController {
     public String home() {
         return "Bienvenue dans l'application de gestion des résidences !";
     }
-
-    @GetMapping("/test-home")
-    public String test() {
-        return "Test depuis HomeController";
-    }
 }
