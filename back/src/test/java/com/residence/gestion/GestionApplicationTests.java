@@ -1,10 +1,10 @@
-package com.residence.backend;
+package com.residence.gestion;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class GestionApplicationTests {
 
 	@Test
 	void contextLoads() {
