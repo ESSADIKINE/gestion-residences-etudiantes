@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import SignInPage from './pages/SignInPage';
+import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 
 // Define your custom theme
@@ -49,8 +50,9 @@ function App() {
       <CssBaseline /> {/* Normalize styles across browsers */}
       <Router>
         <Routes>
-          <Route path="/" element={<SignInPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<SignUpPage />} />
+        <Route path="/login" element={<SignInPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
