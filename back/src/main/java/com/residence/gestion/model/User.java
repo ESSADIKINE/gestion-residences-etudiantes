@@ -1,13 +1,9 @@
 package com.residence.gestion.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -16,23 +12,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "L'email ne peut pas être vide.")
-    @Email(message = "Veuillez fournir un email valide.")
+    @NotBlank(message = "Email cannot be empty.")
+    @Email(message = "Invalid email format.")
     private String email;
 
-    @NotBlank(message = "Le mot de passe ne peut pas être vide.")
-    @Size(min = 8, message = "Le mot de passe doit contenir au moins 8 caractères.")
-    @Pattern(
-        regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-        message = "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial."
-    )
+    @NotBlank(message = "Password cannot be empty.")
     private String password;
 
-    @NotBlank(message = "Le rôle ne peut pas être vide.")
-    @Pattern(regexp = "Admin|Resident|Technicien", message = "Le rôle doit être 'Admin', 'Resident', ou 'Technicien'.")
-    private String role; // Admin, Resident, Technicien
+    @NotBlank(message = "Role cannot be empty.")
+    private String role; // ADMIN, RESIDENT, TECHNICIEN
 
     // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
