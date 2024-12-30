@@ -2,6 +2,7 @@ package com.residence.gestion.service;
 
 import com.residence.gestion.model.User;
 import com.residence.gestion.repository.UserRepository;
+import com.residence.gestion.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class AuthService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (passwordEncoder.matches(password, user.getPassword())) {
-                return Optional.of(user); // Password is valid
+                return Optional.of(user); // Return the full User object
             } else {
                 System.out.println("Invalid password for email: " + email);
             }
@@ -38,5 +39,5 @@ public class AuthService {
 
         return Optional.empty();
     }
-
 }
+
