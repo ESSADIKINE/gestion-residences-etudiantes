@@ -25,7 +25,7 @@ const SignInPage = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            credentials: 'include', // Include cookies for session
+            credentials: 'include',
             body: JSON.stringify({ email, password }), // Ensure payload is correct
         });
 

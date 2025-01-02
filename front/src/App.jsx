@@ -5,7 +5,6 @@ import SignInPage from './pages/SignInPage';
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 
-// Define your custom theme
 const theme = createTheme({
   palette: {
     mode: 'light', // Switch between 'light' or 'dark'
@@ -20,7 +19,7 @@ const theme = createTheme({
       paper: '#ffffff', // Background color for paper-like components
     },
     text: {
-      primary: '#333333', // Primary text color
+      primary: '#0056b3', // Primary text color
       secondary: '#757575', // Secondary text color
     },
   },
@@ -39,7 +38,7 @@ const theme = createTheme({
       lineHeight: 1.5,
     },
     button: {
-      textTransform: 'none', // Prevent uppercase transformation of buttons
+      textTransform: 'none',
     },
   },
 });
@@ -47,7 +46,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Normalize styles across browsers */}
+      <CssBaseline /> {}
       <Router>
         <Routes>
         <Route path="/" element={<HomePage />} />
