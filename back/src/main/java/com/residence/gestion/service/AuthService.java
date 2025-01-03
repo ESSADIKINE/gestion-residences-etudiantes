@@ -18,10 +18,15 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public boolean isEmailRegistered(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword())); // Encrypt password
         return userRepository.save(user);
     }
+
 
     public Optional<User> authenticate(String email, String password) {
         Optional<User> userOptional = userRepository.findByEmail(email);

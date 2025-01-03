@@ -22,8 +22,25 @@ public class AuthController {
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return ResponseEntity.ok(authService.registerUser(user));
+    public ResponseEntity<String> register(@RequestBody Map<String, String> userDetails) {
+        String email = userDetails.get("email");
+        String password = userDetails.get("password");
+
+        // Check if the email already exists
+        if (authService.isEmailRegistered(email)) {
+            return ResponseEntity.status(400).body("Email already exists");
+        }
+
+        // Create a new user with default role "RESIDENT"
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password); // Password will be encoded in the service
+        user.setRole("RESIDENT");   // Set the default role to "RESIDENT"
+
+        // Register the user
+        authService.registerUser(user);
+
+        return ResponseEntity.ok("User registered successfully with role RESIDENT");
     }
 
     @PostMapping("/login")
